@@ -20,12 +20,12 @@ torchsummary ： 格式化打印模型信息。
 文章参考：
 
 * 显卡驱动安装：https://neucrack.com/p/252
-* opencv多版本共存：https://neucrack.com/p/349
+* opencv 多版本共存：https://neucrack.com/p/349
 
 
 1、  安装pytorch 、torchsummary
 
-打开 [pytorch](https://pytorch.org/) 官网，点击 [Get Started](https://pytorch.org/get-started/locally/) 进入到下载页面！选择对应pytorch进行下载！
+打开 [pytorch](https://pytorch.org/) 官网，点击 [Get Started](https://pytorch.org/get-started/locally/) 进入到下载页面！选择对应 pytorch 进行下载！
 
 此处安装的是 gpu 版本的 pytorch 。
 
@@ -37,7 +37,7 @@ pip3 install torchsummary
 ~~~
 
 
-2、 编译onnx2ncnn工具
+2、 编译 onnx2ncnn 工具
 
  工具github地址：https://github.com/Tencent/ncnn.git  
 
@@ -62,7 +62,7 @@ cmake -DCMAKE_BUILD_TYPE=Release -DNCNN_VULKAN=ON -DNCNN_SYSTEM_GLSLANG=OFF -DNC
 make
 ~~~
 
-编译完后你就得到了ncnn的模型转换工具。
+编译完后你就得到了 ncnn 的模型转换工具。
 
 在 ncnn/build/tools/onnx 目录下，能得到 **onnx2ncnn** 模型转换工具，将该可执行文件加入到环境变量中方便使用。
 
@@ -76,7 +76,7 @@ export PATH=$PATH:`pwd`/tools/onnx
 
 ## 图像分类模型训练过程
 
-图像分类主要采用的模型是 resnet18 ，由 pytorch 架构训练完成，经由网络模型转换后部署到v831上。
+图像分类主要采用的模型是 resnet18 ，由 pytorch 架构训练完成，经由网络模型转换后部署到 v831 上。
 
 流程是： pytorch 训练 -> onnx 模型 -> ncnn 模型 -> 在线工具量化 -> v831 模型
 
@@ -105,7 +105,7 @@ export PATH=$PATH:`pwd`/tools/onnx
 
 ### 数据集准备  
 
-打开resnet18工程中的classifier_resnet_train.py文件。以下是训练时需要注意的一些参数。
+打开 resnet18 工程中的 classifier_resnet_train.py 文件。以下是训练时需要注意的一些参数。
 
 修改 classes_label.py 文件中的 labels 值和 data 文件夹中的目录对应
 
@@ -179,17 +179,17 @@ classifier_1.pth  classifier.onnx  opt.param
 classifier_3.pth  classifier.param  opt.table
 ~~~
 
-生成的ncnn模型此时还无法被v831直接使用，需要经过在线maixhub量化为int8模型才可以被使用。
+生成的 ncnn 模型此时还无法被 v831 直接使用，需要经过在线 maixhub 量化为 int8 模型才可以被使用。
 
 ### 模型转换  
 
 在线转换需要上传一个压缩包文件.  
-- 该功能只能支持上传一个无密码的zip压缩包  
+- 该功能只能支持上传一个无密码的 zip 压缩包  
 - 压缩包内需要包含一个 images 目录，一个 xxx.bin，一个 xxx.param  
 - 需要将矫正图片放入 images 目录内；矫正图片集可考虑直接采用训练中的验证数据集，并务必保证矫正时图像的预处理方式与训练和部署时一致。  
 > 注意：确保 images 目录内没有混入其他文件，否则会导致模型量化错误。
 
-zip压缩包目录结构
+zip 压缩包目录结构
 ~~~ bash
 └─xxxx.zip
     |─ images
