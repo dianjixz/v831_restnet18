@@ -110,7 +110,7 @@ export PATH=$PATH:`pwd`/tools/onnx
 修改 classes_label.py 文件中的 labels 值和 data 文件夹中的目录对应
 
 ~~~ python
-dataset_path = "data/datasets"		#训练集的路径（保持默认）
+dataset_path = "data"               #训练集的路径（保持默认）
 val_split_from_data = 0.1 # 10%		#学习率（保持默认）
 batch_size = 4						#训练批次，不需要改动（保持默认）
 learn_rate = 0.001	                #学习率，不需要改动（保持默认）
